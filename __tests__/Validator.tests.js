@@ -78,3 +78,28 @@ describe('NumberSchema', () => {
     expect(schema.isValid(5)).toBe(true);
   });
 });
+
+describe('ArraySchema', () => {
+  test('isValid but not required', () => {
+    const v = new Validator();
+    const schema = v.array();
+    expect(schema.isValid(null)).toBe(true);
+  });
+
+  test('isValid and required', () => {
+    const v = new Validator();
+    const schema = v.array();
+    schema.required();
+    expect(schema.isValid(null)).toBe(false);
+    expect(schema.isValid([])).toBe(true);
+    expect(schema.isValid(['value'])).toBe(true);
+  });
+
+  test('sizeof', () => {
+    const v = new Validator();
+    const schema = v.array();
+    schema.required().sizeof(2);
+    expect(schema.isValid(['value'])).toBe(false);
+    expect(schema.isValid(['value', 123])).toBe(true);
+  });
+});
