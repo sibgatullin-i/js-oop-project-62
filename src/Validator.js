@@ -4,23 +4,37 @@ import ArraySchema from './ArraySchema.js';
 import ObjectSchema from './ObjectSchema.js';
 
 export default class Validator {
-  string() {
+  constructor() {
     this.stringSchema = new StringSchema();
+    this.numberSchema = new NumberSchema();
+    this.arraySchema = new ArraySchema();
+    this.objectSchema = new ObjectSchema();
+    this.types = ['string', 'number'];
+  }
+
+  string() {
     return this.stringSchema;
   }
 
   number() {
-    this.numberSchema = new NumberSchema();
     return this.numberSchema;
   }
 
   array() {
-    this.arraySchema = new ArraySchema();
     return this.arraySchema;
   }
 
   object() {
-    this.objectSchema = new ObjectSchema();
     return this.objectSchema;
+  }
+
+  addValidator(type, name, fn) {
+    if (!this.types.includes(type) || typeof fn !== 'function' || typeof name !== 'string') {
+      throw new Error('wrong type or callback function');
+    }
+    this[`${type}Schema`].customValidators.push({
+      name,
+      fn,
+    });
   }
 }

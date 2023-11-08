@@ -1,6 +1,7 @@
 export default class ArraySchema {
   constructor() {
     this.validators = [];
+    this.customValidators = [];
   }
 
   isValid(value) {
