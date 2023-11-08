@@ -2,6 +2,7 @@
   "name": "@hexlet/code",
   "version": "0.0.1",
   "description": "description is not delivered yet",
+  "main": "index.js",
   "bin": {
     "nodejs-package": "bin/validator.js"
   },
