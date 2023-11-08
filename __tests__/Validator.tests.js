@@ -3,7 +3,6 @@ import { test, expect, describe } from '@jest/globals';
 import Validator from '../src/Validator.js';
 
 describe('String Schema', () => {
-
   test('isValid but not required', () => {
     const v = new Validator();
     const schema = v.string();
@@ -37,5 +36,5 @@ describe('String Schema', () => {
     schema.required();
     expect(schema.minLength(5).isValid('one')).toBe(false);
     expect(schema.isValid('one-two-three')).toBe(true);
-  })
+  });
 });

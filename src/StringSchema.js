@@ -21,7 +21,7 @@ export default class StringSchema {
   }
 
   contains(pattern) {
-    this.validators.push((value => typeof value === 'string' && value.includes(pattern)));
+    this.validators.push((value) => typeof value === 'string' && value.includes(pattern));
     return this;
   }
 }
