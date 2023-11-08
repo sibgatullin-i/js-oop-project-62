@@ -2,7 +2,7 @@ import { test, expect, describe } from '@jest/globals';
 
 import Validator from '../src/Validator.js';
 
-describe('String Schema', () => {
+describe('StringSchema', () => {
   test('isValid but not required', () => {
     const v = new Validator();
     const schema = v.string();
@@ -36,5 +36,45 @@ describe('String Schema', () => {
     schema.required();
     expect(schema.minLength(5).isValid('one')).toBe(false);
     expect(schema.isValid('one-two-three')).toBe(true);
+  });
+});
+
+describe('NumberSchema', () => {
+  test('isValid but not required', () => {
+    const v = new Validator();
+    const schema = v.number();
+    expect(schema.isValid(null)).toBe(true);
+  });
+
+  test('isValid and required', () => {
+    const v = new Validator();
+    const schema = v.number();
+    schema.required();
+    expect(schema.isValid(null)).toBe(false);
+    expect(schema.isValid(7)).toBe(true);
+  });
+
+  test('positive', () => {
+    const v = new Validator();
+    const schema = v.number();
+    schema.required().positive();
+    expect(schema.isValid(10)).toBe(true);
+    expect(schema.isValid(-10)).toBe(false);
+  });
+
+  test('range', () => {
+    const v = new Validator();
+    const schema = v.number();
+    schema.required().range(-5, 5);
+    expect(schema.isValid(0)).toBe(true);
+    expect(schema.isValid(100)).toBe(false);
+  });
+
+  test('all together', () => {
+    const v = new Validator();
+    const schema = v.number();
+    schema.required().range(-5, 5).positive();
+    expect(schema.isValid(-3)).toBe(false);
+    expect(schema.isValid(5)).toBe(true);
   });
 });
