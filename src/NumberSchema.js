@@ -16,7 +16,12 @@ export default class NumberSchema {
   }
 
   positive() {
-    this.validators.push((value) => typeof value === 'number' && value > 0);
+    this.validators.push((value) => {
+      if (typeof value === 'number') {
+        return value > 0
+      };
+      return true;
+    });
     return this;
   }
 
