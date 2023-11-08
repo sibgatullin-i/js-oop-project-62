@@ -11,6 +11,6 @@ export default class ObjectSchema {
         .map((key) => this.validatorObject[key].isValid(this.object[key]))
         .reduce((acc, validator) => acc && validator, true);
     }
-    return false;
+    return true;
   }
 }

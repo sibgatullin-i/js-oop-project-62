@@ -105,6 +105,12 @@ describe('ArraySchema', () => {
 });
 
 describe('ObjectSchema', () => {
+  test('falsy object', () => {
+    const v = new Validator();
+    const schema = v.object();
+    expect(schema.isValid(null)).toBe(true);
+  });
+
   test('shape and validate', () => {
     const v = new Validator();
     const schema = v.object();
