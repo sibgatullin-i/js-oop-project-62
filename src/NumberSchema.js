@@ -18,8 +18,8 @@ export default class NumberSchema {
   positive() {
     this.validators.push((value) => {
       if (typeof value === 'number') {
-        return value > 0
-      };
+        return value > 0;
+      }
       return true;
     });
     return this;
